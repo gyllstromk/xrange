@@ -1,0 +1,13 @@
+{
+  "name": "xrange",
+  "version": "0.0.1",
+  "main": [
+    "./xrange.js"
+  ],
+  "dependencies": {},
+  "description": "xrange function for node + javascript",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gyllstromk/xrange.git"
+  }
+}

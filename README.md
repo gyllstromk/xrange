@@ -8,7 +8,7 @@ Javascript xrange function for node + browser.
 
 ## Browser
 
-   bower install xrange 
+    bower install xrange 
 
 # Usage
 
