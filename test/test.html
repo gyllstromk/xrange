@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../node_modules/mocha-phantomjs/node_modules/mocha" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../node_modules/mocha-phantomjs/node_modules/mocha/mocha.js"></script>
+    <script>
+        mocha.ui('bdd'); 
+        mocha.reporter('html');
+    </script>
+
+    <script src="../xrange.js"></script>
+    <script src="./test.js"></script>
+    <script>
+        if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+        else { mocha.run(); }
+    </script>
+  </body>
+</html>
