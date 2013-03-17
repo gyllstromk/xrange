@@ -55,13 +55,13 @@
 
         var args = Array.prototype.slice.call(arguments);
 
-        if (args.length <= 2) {
-            by = 1;
-        }
-
         if (args.length === 1) {
             finish = start;
             start = 0;
+        }
+
+        if (args.length <= 2) {
+            by = finish > start ? 1 : -1;
         }
 
         if (by === 0) {

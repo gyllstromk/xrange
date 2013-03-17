@@ -1,7 +1,7 @@
 /*globals describe,it*/
 
 if (typeof module !== 'undefined') {
-    var xrange = require('../xrange');
+    var xrange = require('../index');
 
     var assert = require('assert');
 } else {
@@ -58,6 +58,8 @@ describe('Test xrange', function() {
             it('xrange with 2 param', function() {
                 for (var i = 0; i < 4; i++) {
                     assert.deepEqual(xrange(i, 4).toArray(), zero2three.slice(i));
+                    assert.deepEqual(xrange(3, i - 1).toArray().reverse(),
+                        zero2three.slice(i));
                 }
             });
 
