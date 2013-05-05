@@ -1,14 +1,8 @@
-Javascript xrange function for node + browser.
+# xrange.js
 
-# Installation
+Javascript `xrange` / `range`. function for node + browser.
 
-## Node
-
-    npm install xrange
-
-## Browser
-
-    bower install xrange 
+`xrange` is based on the function of the same name from Python 2. It is a facility to iterate from `start` to `finish` by `increment` -- even downward -- without having to create a loop or array. Importantly, like the one in Python, `xrange` can be used completely as an iterator, with *no array* created.
 
 # Usage
 
@@ -29,7 +23,7 @@ xrange(5, 2).toArray();     // -> [ 5, 4, 3 ];
 xrange(5, 0, -2).toArray(); // -> [ 5, 3, 1 ];
 ```
 
-## Iterators:
+## Iterators
 
 ### each/foreach
 
@@ -52,3 +46,13 @@ var plusOne = xrange(3).map(function(each) {
     return each + 1;
 });
 ```
+
+# Installation
+
+## Node
+
+    npm install xrange
+
+## Browser
+
+    bower install xrange 
