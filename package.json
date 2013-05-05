@@ -6,12 +6,27 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec && ./node_modules/.bin/mocha-phantomjs -R spec test/test.html --bail"
   },
-  "repository": "https://github.com/gyllstromk/xrange",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gyllstromk/xrange"
+  },
   "author": "Karl Gyllstrom",
   "license": "BSD",
   "devDependencies": {
     "mocha": "~1.8.2",
     "mocha-phantomjs": "~2.0.1",
     "jshint": "~1.1.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "mocha-phantomjs": "~2.0.1",
+    "jshint": "~1.1.0"
+  },
+  "keywords": [
+    "range",
+    "xrange",
+    "iterator"
+  ]
 }
