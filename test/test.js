@@ -54,7 +54,7 @@ describe('Test xrange', function() {
             });
         });
 
-        describe('lengths', function () {
+        it('lengths', function () {
             var rng = 20;
             for (var to = -rng - 1; to < rng; to++) {
                 assert.xrangeLengthEqual(xrange(to));
