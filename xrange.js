@@ -1,6 +1,8 @@
 (function () {
 
     var XRange = function (start, finish, by) {
+        this.length = Math.ceil((finish - start) / by);
+
         this.map = function (callback) {
             /**
              * Create array by executing `map` on each value.

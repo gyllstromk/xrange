@@ -26,6 +26,10 @@ if (typeof module !== 'undefined') {
     };
 }
 
+assert.xrangeLengthEqual = function (xObj) {
+    assert.equal(xObj.length, xObj.toArray().length);
+};
+
 describe('Test xrange', function() {
     var zero2three = [ 0, 1, 2, 3 ];
 
@@ -48,6 +52,24 @@ describe('Test xrange', function() {
                     xrange(4, 0, 1);
                 }, /TypeError.*by/);
             });
+        });
+
+        it('lengths', function () {
+            var rng = 20;
+            for (var to = -rng - 1; to < rng; to++) {
+                assert.xrangeLengthEqual(xrange(to));
+                assert.xrangeLengthEqual(xrange(- to));
+
+                for (var from = -rng; from < to; from++) {
+                    assert.xrangeLengthEqual(xrange(from, to));
+                    assert.xrangeLengthEqual(xrange(to, from));
+
+                    for (var by = 1; by < to; by++) {
+                        assert.xrangeLengthEqual(xrange(from, to, by));
+                        assert.xrangeLengthEqual(xrange(to, from, -by));
+                    }
+                }
+            }
         });
 
         describe('Counts', function() {
