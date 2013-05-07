@@ -1,6 +1,6 @@
 # xrange.js
 
-Javascript `xrange` / `range`. function for node + browser.
+Javascript `xrange` / `range` function for node and browser.
 
 `xrange` is based on the function of the same name from Python 2. It is a facility to iterate from `start` to `finish` by `increment` -- even downward -- without having to create a loop or array. Importantly, like the one in Python, `xrange` can be used completely as an iterator, with *no array* created.
 
@@ -11,7 +11,7 @@ Javascript `xrange` / `range`. function for node + browser.
 ```js
 xrange(3).toArray();        // -> [ 0, 1, 2 ];
 xrange(1, 4).toArray();     // -> [ 1, 2, 3 ];
-xrange(1, 5, 2).toArray();  // -> [ 1, 3, 5 ];
+xrange(1, 6, 2).toArray();  // -> [ 1, 3, 5 ];
 ```
 
 ## Count downwards
