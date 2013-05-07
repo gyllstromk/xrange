@@ -16,6 +16,12 @@ if (typeof module !== 'undefined') {
             }
         },
 
+        equal: function(a, b) {
+            if (a != b) {
+                throw new Error(a + ' != ' + b);
+            }
+        },
+
         deepEqual: function(a, b) {
             for (var i = 0, ii = a.length; i < ii; i++) {
                 if (a[i] !== b[i]) {
