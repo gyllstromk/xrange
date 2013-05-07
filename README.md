@@ -16,11 +16,18 @@ xrange(1, 6, 2).toArray();  // -> [ 1, 3, 5 ];
 
 ## Count downwards
 
-If second argument < first:
+Implied if second argument < first, but can also be set as 3rd parameter:
 
 ```js
 xrange(5, 2).toArray();     // -> [ 5, 4, 3 ];
 xrange(5, 0, -2).toArray(); // -> [ 5, 3, 1 ];
+```
+
+## Length
+
+```js
+xrange(5).length; // 5
+xrange(0, 5, 2);  // 3
 ```
 
 ## Iterators
