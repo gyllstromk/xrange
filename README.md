@@ -47,6 +47,30 @@ var plusOne = xrange(3).map(function(each) {
 });
 ```
 
+## Recipes
+
+Create an array of 5 5's:
+
+```js
+var array = xrange(5).map(function () {
+    return 5;
+});
+```
+
+Use [async](https://github.com/caolan/async) like a `for` loop:
+
+```js
+async.each(
+    xrange(1, 10),
+    function(each, callback) {
+        callback(null, each);
+    }, function (err) {
+        // finished ...
+    }
+);
+;
+```
+
 # Installation
 
 ## Node
