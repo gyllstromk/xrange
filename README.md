@@ -68,7 +68,6 @@ async.each(
         // finished ...
     }
 );
-;
 ```
 
 # Installation
