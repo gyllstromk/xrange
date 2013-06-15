@@ -1,7 +1,7 @@
 {
   "name": "xrange",
-  "version": "1.0.0",
-  "description": "xrange function for node + javascript",
+  "version": "1.0.1",
+  "description": "xrange function for easy numeric iteration",
   "main": "index.js",
   "scripts": {
     "pretest": "./node_modules/.bin/jshint .",
