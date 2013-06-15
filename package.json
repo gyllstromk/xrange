@@ -20,10 +20,6 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "mocha-phantomjs": "~2.0.1",
-    "jshint": "~1.1.0"
-  },
   "keywords": [
     "range",
     "xrange",
