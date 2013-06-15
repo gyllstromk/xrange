@@ -1,6 +1,6 @@
 {
   "name": "xrange",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "xrange function for node + javascript",
   "main": "index.js",
   "scripts": {
