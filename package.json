@@ -4,7 +4,9 @@
   "description": "xrange function for node + javascript",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec && ./node_modules/.bin/mocha-phantomjs -R spec test/test.html --bail"
+    "pretest": "./node_modules/.bin/jshint .",
+    "test": "./node_modules/.bin/mocha -R spec",
+    "test-web": "./node_modules/.bin/mocha-phantomjs -R spec test/test.html --bail"
   },
   "repository": {
     "type": "git",
