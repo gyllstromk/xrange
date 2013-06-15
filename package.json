@@ -1,10 +1,12 @@
 {
   "name": "xrange",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "xrange function for node + javascript",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec && ./node_modules/.bin/mocha-phantomjs -R spec test/test.html --bail"
+    "pretest": "./node_modules/.bin/jshint .",
+    "test": "./node_modules/.bin/mocha -R spec",
+    "test-web": "./node_modules/.bin/mocha-phantomjs -R spec test/test.html --bail"
   },
   "repository": {
     "type": "git",
@@ -13,16 +15,12 @@
   "author": "Karl Gyllstrom",
   "license": "BSD",
   "devDependencies": {
-    "mocha": "~1.8.2",
-    "mocha-phantomjs": "~2.0.1",
-    "jshint": "~1.1.0"
+    "jshint": "~2.1.3",
+    "mocha": "~1.11.0",
+    "mocha-phantomjs": "~3.0.0"
   },
   "directories": {
     "test": "test"
-  },
-  "dependencies": {
-    "mocha-phantomjs": "~2.0.1",
-    "jshint": "~1.1.0"
   },
   "keywords": [
     "range",
