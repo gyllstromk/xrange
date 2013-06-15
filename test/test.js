@@ -6,7 +6,7 @@ if (typeof module !== 'undefined') {
     var assert = require('assert');
 } else {
     var assert = {
-        throws: function(thrower, catcher) {
+        throws: function (thrower, catcher) {
             try {
                 thrower();
             } catch (error) {
@@ -16,13 +16,13 @@ if (typeof module !== 'undefined') {
             }
         },
 
-        equal: function(a, b) {
-            if (a != b) {
-                throw new Error(a + ' != ' + b);
+        strictEqual: function (a, b) {
+            if (a !== b) {
+                throw new Error(a + ' !== ' + b);
             }
         },
 
-        deepEqual: function(a, b) {
+        deepEqual: function (a, b) {
             for (var i = 0, ii = a.length; i < ii; i++) {
                 if (a[i] !== b[i]) {
                     throw new Error('AssertionError');
@@ -33,34 +33,34 @@ if (typeof module !== 'undefined') {
 }
 
 assert.xrangeLengthEqual = function (xObj) {
-    assert.equal(xObj.length, xObj.toArray().length);
+    assert.strictEqual(xObj.length, xObj.toArray().length);
 };
 
-describe('Test xrange', function() {
+describe('Test xrange', function () {
     var zero2three = [ 0, 1, 2, 3 ];
 
-    describe('Parameters', function() {
-        describe('Invalid', function() {
-            it('fails when by === 0', function() {
-                assert.throws(function() {
+    describe('Parameters', function () {
+        describe('Invalid', function () {
+            it('fails when by === 0', function () {
+                assert.throws(function () {
                     xrange(0, 4, 0);
                 }, /TypeError.*0/);
             });
 
-            it('fails when by === negative and direction positive', function() {
-                assert.throws(function() {
+            it('fails when by === negative and direction positive', function () {
+                assert.throws(function () {
                     xrange(0, 4, -1);
                 }, /TypeError.*by/);
             });
 
-            it('fails when by === positive and direction negative', function() {
-                assert.throws(function() {
+            it('fails when by === positive and direction negative', function () {
+                assert.throws(function () {
                     xrange(4, 0, 1);
                 }, /TypeError.*by/);
             });
         });
 
-        it('lengths', function () {
+        it('lengths', function  () {
             var rng = 20;
             for (var to = -rng - 1; to < rng; to++) {
                 assert.xrangeLengthEqual(xrange(to));
@@ -78,12 +78,12 @@ describe('Test xrange', function() {
             }
         });
 
-        describe('Counts', function() {
-            it('xrange with 1 param', function() {
+        describe('Counts', function () {
+            it('xrange with 1 param', function () {
                 assert.deepEqual(xrange(4).toArray(), zero2three);
             });
 
-            it('xrange with 2 param', function() {
+            it('xrange with 2 param', function () {
                 for (var i = 0; i < 4; i++) {
                     assert.deepEqual(xrange(i, 4).toArray(), zero2three.slice(i));
                     assert.deepEqual(xrange(3, i - 1).toArray().reverse(),
@@ -91,7 +91,7 @@ describe('Test xrange', function() {
                 }
             });
 
-            it('xrange with 3 param', function() {
+            it('xrange with 3 param', function () {
                 assert.deepEqual(xrange(0, 4, 1).toArray(), zero2three);
                 assert.deepEqual(xrange(3, -1, -1).toArray().reverse(), zero2three);
 
@@ -138,11 +138,11 @@ describe('Test xrange', function() {
         });
     });
 
-    describe('iterators', function() {
-        [ 'each', 'forEach' ].forEach(function(key) {
-            it(key, function() {
+    describe('iterators', function () {
+        [ 'each', 'forEach' ].forEach(function (key) {
+            it(key, function () {
                 var results = [];
-                xrange(4)[key](function(each) {
+                xrange(4)[key](function (each) {
                     results.push(each);
                 });
 
@@ -150,8 +150,8 @@ describe('Test xrange', function() {
             });
         });
 
-        it('map', function() {
-            assert.deepEqual(xrange(-1, 3).map(function(each) {
+        it('map', function () {
+            assert.deepEqual(xrange(-1, 3).map(function (each) {
                 return each + 1;
             }), zero2three);
         });
