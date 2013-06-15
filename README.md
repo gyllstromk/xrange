@@ -1,4 +1,5 @@
 # xrange.js
+[![Build Status](https://travis-ci.org/gyllstromk/xrange.png?branch=master)](https://travis-ci.org/gyllstromk/xrange)
 
 Javascript `xrange` / `range` function for node and browser.
 
