@@ -155,6 +155,21 @@ describe('Test xrange', function () {
                 return each + 1;
             }), zero2three);
         });
+
+        it('filter', function () {
+            assert.deepEqual(xrange(-5, 5).filter(function (each) {
+                return each >= 0 && each <= 3;
+            }), zero2three);
+        });
+
+        it('reduce', function () {
+            assert.equal(xrange(-5, 8).reduce(function (acc, each) {
+                return acc + each;
+            }), 13);
+            assert.equal(xrange(-5, 8).reduce(function (acc, each) {
+                return acc + each;
+            }, 1), 14);
+        });
     });
 });
 

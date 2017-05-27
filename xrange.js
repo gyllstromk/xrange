@@ -20,6 +20,37 @@
             return results;
         };
 
+        this.filter = function (callback) {
+            /**
+             * Create array of items that satisfy predicate function
+             */
+
+            var results = [];
+
+            for (var i = start; i < finish; i += by) {
+                if (callback(i)) {
+                    results.push(i);
+                }
+            }
+            return results;
+        };
+
+        this.reduce = function (callback, acc) {
+            /**
+             *  Reduces an xrange by specified callback
+             */
+
+            if (acc === undefined) {
+                acc = start;
+                start += by;
+            }
+
+            for (var i = start; i < finish; i += by) {
+                acc = callback(acc, i);
+            }
+            return acc;
+        };
+
         this.each = this.forEach = function (callback) {
             /**
              * Call `callback` on each item.
@@ -43,6 +74,8 @@
                 return each;
             });
         };
+
+
     };
 
     var factory = function (start, finish, by) {
