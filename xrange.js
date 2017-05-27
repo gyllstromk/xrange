@@ -8,18 +8,13 @@
              * Create array by executing `map` on each value.
              */
 
-            var results = [];
+            var results = new Array(this.length);
 
-            var cmp = function (i, finish) {
-                if (start < finish) {
-                    return i < finish;
-                } else {
-                    return i > finish;
-                }
-            };
+            var value = start;
 
-            for (var i = start; cmp(i, finish); i += by) {
-                results.push(callback(i));
+            for (var i = 0; i < this.length; i++) {
+                results[i] = callback(value);
+                value += by;
             }
 
             return results;
