@@ -21,9 +21,9 @@
 
             var results = [];
 
-            for (var i = start; cmp(i, finish); i += by) {
-                results.push(callback(i));
-            }
+            this.forEach(function (value) {
+                results.push(callback(value));
+            });
 
             return results;
         };
