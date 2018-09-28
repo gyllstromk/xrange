@@ -38,6 +38,7 @@ assert.xrangeLengthEqual = function (xObj) {
 
 describe('Test xrange', function () {
     var zero2three = [ 0, 1, 2, 3 ];
+    var zero2MinusThree = [0, -1, -2, -3];
 
     describe('Parameters', function () {
         describe('Invalid', function () {
@@ -148,12 +149,27 @@ describe('Test xrange', function () {
 
                 assert.deepEqual(results, zero2three);
             });
+
+            it(key + ' backward', function () {
+                var results = [];
+                xrange(-4)[key](function (each) {
+                    results.push(each);
+                });
+
+                assert.deepEqual(results, zero2MinusThree);
+            });
         });
 
         it('map', function () {
             assert.deepEqual(xrange(-1, 3).map(function (each) {
                 return each + 1;
             }), zero2three);
+        });
+
+        it('map backward', function () {
+            assert.deepEqual(xrange(-1, -5).map(function (each) {
+                return each + 1;
+            }), zero2MinusThree);
         });
     });
 });
