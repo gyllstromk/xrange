@@ -2,6 +2,7 @@
 
     var XRange = function (start, finish, by) {
         this.length = Math.abs(Math.ceil((finish - start) / by));
+        var self = this;
 
         var cmp;
         if (start < finish) {
@@ -21,8 +22,8 @@
 
             var results = [];
 
-            this.forEach(function (value) {
-                results.push(callback(value));
+            this.forEach(function (value, idx, range) {
+                results.push(callback(value, idx, range));
             });
 
             return results;
@@ -35,10 +36,12 @@
              * If `callback` is false, stops loop.
              */
 
+            var idx = 0;
             for (var i = start; cmp(i, finish); i += by) {
-                if (callback(i) === false) {
+                if (callback(i, idx, self) === false) {
                     break;
                 }
+                idx += 1;
             }
         };
 

@@ -158,6 +158,16 @@ describe('Test xrange', function () {
 
                 assert.deepEqual(results, zero2MinusThree);
             });
+
+            it(key + ' with index and xrange', function () {
+                var indices = [];
+                var unitUnderTest = xrange(5, 9);
+                unitUnderTest[key](function (each, idx, r) {
+                    indices.push(idx);
+                    assert.strictEqual(r, unitUnderTest);
+                });
+                assert.deepEqual(indices, zero2three);
+            });
         });
 
         it('map', function () {
@@ -170,6 +180,16 @@ describe('Test xrange', function () {
             assert.deepEqual(xrange(-1, -5).map(function (each) {
                 return each + 1;
             }), zero2MinusThree);
+        });
+
+        it('map with index and xrange', function () {
+            var indices = [];
+            var unitUnderTest = xrange(5, 9);
+            unitUnderTest.map(function (each, idx, r) {
+                indices.push(idx);
+                assert.strictEqual(r, unitUnderTest);
+            });
+            assert.deepEqual(indices, zero2three);
         });
     });
 });
