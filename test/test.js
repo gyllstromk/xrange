@@ -5,7 +5,17 @@ if (typeof module !== 'undefined') {
 
     var assert = require('assert');
 } else {
-    var assert = {
+    var assertOk = function (value) {
+        if (value) {
+            throw new Error('AssertionError');
+        }
+    };
+    var assert = function (value) {
+        assertOk(value);
+    };
+    Object.assign(assert, {
+        ok: assertOk,
+
         throws: function (thrower, catcher) {
             try {
                 thrower();
@@ -29,7 +39,7 @@ if (typeof module !== 'undefined') {
                 }
             }
         }
-    };
+    });
 }
 
 assert.xrangeLengthEqual = function (xObj) {
@@ -207,6 +217,26 @@ describe('Test xrange', function () {
                     results.push(next.value);
                 }
                 assert.deepEqual(results, zero2three);
+            });
+        });
+
+        describe('every', function () {
+            it('returns true if every test passes', function () {
+                assert.ok(xrange(5).every(function (value) {
+                    return value < 5;
+                }));
+            });
+
+            it('returns false if any test fails', function () {
+                assert.ok(!xrange(5).every(function (value) {
+                    return value !== 3;
+                }));
+            });
+
+            it('returns true for an empty range', function () {
+                assert.ok(xrange(0).every(function () {
+                    return false;
+                }));
             });
         });
     });
