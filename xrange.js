@@ -150,6 +150,12 @@
             });
         };
 
+        this.indexOf = function (needle) {
+            return this.findIndex(function (value) {
+                return value === needle;
+            });
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }

@@ -283,11 +283,21 @@ describe('Test xrange', function () {
         });
 
         it('includes', function () {
-            assert.ok(xrange(0, 4).includes(2));
+            assert.ok(xrange(4).includes(2));
         });
 
         it('does not include', function () {
-            assert.ok(!xrange(0, 4).includes(4));
+            assert.ok(!xrange(4).includes(4));
+        });
+
+        describe('indexOf', function () {
+            it('is found', function () {
+                assert.strictEqual(xrange(5, 10).indexOf(7), 2);
+            });
+
+            it('is not found', function () {
+                assert.strictEqual(xrange(5, 10).indexOf(10), -1);
+            });
         });
 
         describe('every', function () {

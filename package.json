@@ -26,5 +26,6 @@
     "range",
     "xrange",
     "iterator"
-  ]
+  ],
+  "dependencies": {}
 }
