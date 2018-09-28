@@ -77,7 +77,7 @@
             return iterator;
         };
 
-        this.iterator = function () {
+        this.transformIterator = function (callback) {
             var entryIterator = this.entries();
             var iterator = {
                 next: function () {
@@ -85,10 +85,16 @@
                     if (nextEntry.done) {
                         return { done: true };
                     }
-                    return { value: nextEntry.value[1] };
+                    return { value: callback(nextEntry.value[1], nextEntry.value[0], self) };
                 }
             };
             return iterator;
+        };
+
+        this.iterator = function () {
+            return this.transformIterator(function (value) {
+                return value;
+            });
         };
 
         this.every = function (callback) {
