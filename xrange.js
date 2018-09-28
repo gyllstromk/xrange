@@ -122,6 +122,25 @@
             return results;
         };
 
+        this.findEntry = function (callback) {
+            var found = [-1, undefined];
+            this.forEach(function (value, idx, range) {
+                if (callback(value, idx, range)) {
+                    found = [idx, value];
+                    return false;
+                }
+            });
+            return found;
+        };
+
+        this.find = function (callback) {
+            return this.findEntry(callback)[1];
+        };
+
+        this.findIndex = function (callback) {
+            return this.findEntry(callback)[0];
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }

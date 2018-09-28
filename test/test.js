@@ -240,6 +240,48 @@ describe('Test xrange', function () {
             assert.deepEqual(filtered, [6, 9]);
         });
 
+        it('find', function () {
+            var found = xrange(5, 10).find(function (value) {
+                return value % 3 === 0;
+            });
+            assert.strictEqual(found, 6);
+        });
+
+        it('find nothing', function () {
+            var found = xrange(5, 10).find(function (value) {
+                return value < 5;
+            });
+            assert.strictEqual(found, undefined);
+        });
+
+        it('findIndex', function () {
+            var found = xrange(5, 10).findIndex(function (value) {
+                return value % 3 === 0;
+            });
+            assert.strictEqual(found, 1);
+        });
+
+        it('find no index', function () {
+            var found = xrange(5, 10).findIndex(function (value) {
+                return value < 5;
+            });
+            assert.strictEqual(found, -1);
+        });
+
+        it('findEntry', function () {
+            var found = xrange(5, 10).findEntry(function (value) {
+                return value % 3 === 0;
+            });
+            assert.deepEqual(found, [1, 6]);
+        });
+
+        it('find no entry', function () {
+            var found = xrange(5, 10).findEntry(function (value) {
+                return value < 5;
+            });
+            assert.deepEqual(found, [-1, undefined]);
+        });
+
         describe('every', function () {
             it('returns true if every test passes', function () {
                 assert.ok(xrange(5).every(function (value) {
