@@ -97,6 +97,12 @@
             });
         };
 
+        this.keys = function () {
+            return this.transformIterator(function (value, idx) {
+                return idx;
+            });
+        };
+
         this.every = function (callback) {
             var every = true;
             this.forEach(function (value, idx, range) {

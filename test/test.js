@@ -233,6 +233,19 @@ describe('Test xrange', function () {
             assert.deepEqual(entries, [[0, 4], [1, 6], [2, 8], [3, 10]]);
         });
 
+        it('keys', function () {
+            var iterator = xrange(4, 12, 2).keys();
+            var keys = [];
+            while (true) {
+                var next = iterator.next();
+                if (next.done) {
+                    break;
+                }
+                keys.push(next.value);
+            }
+            assert.deepEqual(keys, [0, 1, 2, 3]);
+        });
+
         it('filter', function () {
             var filtered = xrange(5, 10).filter(function (value) {
                 return value % 3 === 0;
