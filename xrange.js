@@ -3,13 +3,16 @@
     var XRange = function (start, finish, by) {
         this.length = Math.abs(Math.ceil((finish - start) / by));
 
-        var cmp = function (i, finish) {
-            if (start < finish) {
+        var cmp;
+        if (start < finish) {
+            cmp = function (i, finish) {
                 return i < finish;
-            } else {
+            };
+        } else {
+            cmp = function (i, finish) {
                 return i > finish;
-            }
-        };
+            };
+        }
 
         this.map = function (callback) {
             /**
