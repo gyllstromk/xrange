@@ -75,7 +75,7 @@
         };
 
         this.iterator = function () {
-            var entryIterator = self.entries();
+            var entryIterator = this.entries();
             var iterator = {
                 next: function () {
                     var nextEntry = entryIterator.next();
@@ -110,6 +110,16 @@
                 }
             });
             return some;
+        };
+
+        this.filter = function (callback) {
+            var results = [];
+            this.forEach(function (value, idx, range) {
+                if (callback(value, idx, range)) {
+                    results.push(value);
+                }
+            });
+            return results;
         };
 
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {

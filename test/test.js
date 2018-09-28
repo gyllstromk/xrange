@@ -233,6 +233,13 @@ describe('Test xrange', function () {
             assert.deepEqual(entries, [[0, 4], [1, 6], [2, 8], [3, 10]]);
         });
 
+        it('filter', function () {
+            var filtered = xrange(5, 10).filter(function (value) {
+                return value % 3 === 0;
+            });
+            assert.deepEqual(filtered, [6, 9]);
+        });
+
         describe('every', function () {
             it('returns true if every test passes', function () {
                 assert.ok(xrange(5).every(function (value) {
