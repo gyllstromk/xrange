@@ -282,6 +282,14 @@ describe('Test xrange', function () {
             assert.deepEqual(found, [-1, undefined]);
         });
 
+        it('includes', function () {
+            assert.ok(xrange(0, 4).includes(2));
+        });
+
+        it('does not include', function () {
+            assert.ok(!xrange(0, 4).includes(4));
+        });
+
         describe('every', function () {
             it('returns true if every test passes', function () {
                 assert.ok(xrange(5).every(function (value) {

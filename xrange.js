@@ -141,6 +141,12 @@
             return this.findEntry(callback)[0];
         };
 
+        this.includes = function (needle) {
+            return this.some(function (value) {
+                return value === needle;
+            });
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }
