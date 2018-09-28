@@ -239,6 +239,26 @@ describe('Test xrange', function () {
                 }));
             });
         });
+
+        describe('some', function () {
+            it('returns false if every test fails', function () {
+                assert.ok(!xrange(5).some(function (value) {
+                    return value >= 5;
+                }));
+            });
+
+            it('returns true if any test passes', function () {
+                assert.ok(xrange(5).some(function (value) {
+                    return value === 3;
+                }));
+            });
+
+            it('returns false for an empty range', function () {
+                assert.ok(!xrange(0).some(function () {
+                    return true;
+                }));
+            });
+        });
     });
 });
 

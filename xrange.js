@@ -83,6 +83,18 @@
             return every;
         };
 
+        this.some = function (callback) {
+            var some = false;
+            this.forEach(function (value, idx, range) {
+                var passed = callback(value, idx, range);
+                if (passed) {
+                    some = true;
+                    return false;
+                }
+            });
+            return some;
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }
