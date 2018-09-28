@@ -85,7 +85,7 @@
                     if (nextEntry.done) {
                         return { done: true };
                     }
-                    return { value: nextEntry.value[0] };
+                    return { value: nextEntry.value[1] };
                 }
             };
             return iterator;

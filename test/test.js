@@ -207,7 +207,7 @@ describe('Test xrange', function () {
             var key = test[0];
             var prop = test[1];
             it(key, function () {
-                var iterator = xrange(4)[prop]();
+                var iterator = xrange(5, 10)[prop]();
                 var results = [];
                 while (true) {
                     var next = iterator.next();
@@ -216,7 +216,7 @@ describe('Test xrange', function () {
                     }
                     results.push(next.value);
                 }
-                assert.deepEqual(results, zero2three);
+                assert.deepEqual(results, [5, 6, 7, 8, 9]);
             });
         });
 
