@@ -1,3 +1,4 @@
+/*globals Symbol*/
 (function () {
 
     var XRange = function (start, finish, by) {
@@ -54,6 +55,25 @@
                 return each;
             });
         };
+
+        this.iterator = function () {
+            var i = start;
+            var iterator = {
+                next: function () {
+                    if (cmp(i, finish)) {
+                        var currentValue = i;
+                        i += by;
+                        return { value: currentValue };
+                    }
+                    return { done: true };
+                }
+            };
+            return iterator;
+        };
+
+        if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
+            this[Symbol.iterator] = this.iterator;
+        }
     };
 
     var factory = function (start, finish, by) {

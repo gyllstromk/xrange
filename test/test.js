@@ -1,4 +1,4 @@
-/*globals describe,it*/
+/*globals describe,it,Symbol*/
 
 if (typeof module !== 'undefined') {
     var xrange = require('../index');
@@ -190,6 +190,24 @@ describe('Test xrange', function () {
                 assert.strictEqual(r, unitUnderTest);
             });
             assert.deepEqual(indices, zero2three);
+        });
+
+
+        [ ['iterator', 'iterator'], ['Symbol.iterator', Symbol.iterator] ].forEach(function (test) {
+            var key = test[0];
+            var prop = test[1];
+            it(key, function () {
+                var iterator = xrange(4)[prop]();
+                var results = [];
+                while (true) {
+                    var next = iterator.next();
+                    if (next.done) {
+                        break;
+                    }
+                    results.push(next.value);
+                }
+                assert.deepEqual(results, zero2three);
+            });
         });
     });
 });
