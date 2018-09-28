@@ -56,16 +56,33 @@
             });
         };
 
-        this.iterator = function () {
+        this.entries = function () {
             var i = start;
+            var idx = 0;
             var iterator = {
                 next: function () {
                     if (cmp(i, finish)) {
                         var currentValue = i;
+                        var currentIdx = idx;
                         i += by;
-                        return { value: currentValue };
+                        idx += 1;
+                        return { value: [currentIdx, currentValue] };
                     }
                     return { done: true };
+                }
+            };
+            return iterator;
+        };
+
+        this.iterator = function () {
+            var entryIterator = self.entries();
+            var iterator = {
+                next: function () {
+                    var nextEntry = entryIterator.next();
+                    if (nextEntry.done) {
+                        return { done: true };
+                    }
+                    return { value: nextEntry.value[0] };
                 }
             };
             return iterator;

@@ -220,6 +220,19 @@ describe('Test xrange', function () {
             });
         });
 
+        it('entries', function () {
+            var iterator = xrange(4, 12, 2).entries();
+            var entries = [];
+            while (true) {
+                var next = iterator.next();
+                if (next.done) {
+                    break;
+                }
+                entries.push(next.value);
+            }
+            assert.deepEqual(entries, [[0, 4], [1, 6], [2, 8], [3, 10]]);
+        });
+
         describe('every', function () {
             it('returns true if every test passes', function () {
                 assert.ok(xrange(5).every(function (value) {
