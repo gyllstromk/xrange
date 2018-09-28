@@ -37,12 +37,15 @@
              * If `callback` is false, stops loop.
              */
 
-            var idx = 0;
-            for (var i = start; cmp(i, finish); i += by) {
-                if (callback(i, idx, self) === false) {
-                    break;
+            var iterator = this.entries();
+            while (true) {
+                var next = iterator.next();
+                if (next.done) {
+                    return;
                 }
-                idx += 1;
+                if (callback(next.value[1], next.value[0], self) === false) {
+                    return;
+                }
             }
         };
 
