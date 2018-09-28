@@ -392,6 +392,20 @@ describe('Test xrange', function () {
                 }));
             });
         });
+
+        it('reduce', function () {
+            var sum = xrange(5, 10).reduce(function (acc, value) {
+                return acc + value;
+            }, 0);
+            assert.strictEqual(sum, 35);
+        });
+
+        it('reduce without init', function () {
+            var sum = xrange(5, 10).reduce(function (acc, value) {
+                return acc * value;
+            });
+            assert.strictEqual(sum, 15120);
+        });
     });
 });
 

@@ -193,6 +193,24 @@
             return str;
         };
 
+        this.reduce = function (callback, initialValue) {
+            var args = Array.prototype.slice.call(arguments);
+            var hasInit = args.length > 1;
+            if (this.length === 0) {
+                if (hasInit) {
+                    return initialValue;
+                }
+                throw new Error('Cannot reduce an empty range without an initial value');
+            }
+            var acc = hasInit ? initialValue : start;
+            this.forEach(function (value, idx, range) {
+                if (hasInit || idx > 0) {
+                    acc = callback(acc, value, idx, range);
+                }
+            });
+            return acc;
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }
