@@ -3,20 +3,20 @@
     var XRange = function (start, finish, by) {
         this.length = Math.abs(Math.ceil((finish - start) / by));
 
+        var cmp = function (i, finish) {
+            if (start < finish) {
+                return i < finish;
+            } else {
+                return i > finish;
+            }
+        };
+
         this.map = function (callback) {
             /**
              * Create array by executing `map` on each value.
              */
 
             var results = [];
-
-            var cmp = function (i, finish) {
-                if (start < finish) {
-                    return i < finish;
-                } else {
-                    return i > finish;
-                }
-            };
 
             for (var i = start; cmp(i, finish); i += by) {
                 results.push(callback(i));
@@ -32,7 +32,7 @@
              * If `callback` is false, stops loop.
              */
 
-            for (var i = start; i < finish; i += by) {
+            for (var i = start; cmp(i, finish); i += by) {
                 if (callback(i) === false) {
                     break;
                 }
