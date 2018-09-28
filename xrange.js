@@ -156,6 +156,20 @@
             });
         };
 
+        this.join = function (_sep) {
+            var separator = _sep || '';
+            var str = '';
+            var last = this.length - 1;
+            this.forEach(function (value, idx) {
+                if (idx < last) {
+                    str += value + separator;
+                } else {
+                    str += value;
+                }
+            });
+            return str;
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }

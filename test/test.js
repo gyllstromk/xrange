@@ -300,6 +300,16 @@ describe('Test xrange', function () {
             });
         });
 
+        describe('join', function () {
+            it('with a sep', function () {
+                assert.strictEqual(xrange(5, 11).join(', '), '5, 6, 7, 8, 9, 10');
+            });
+
+            it('without a sep', function () {
+                assert.strictEqual(xrange(5, 11).join(), '5678910');
+            });
+        });
+
         describe('every', function () {
             it('returns true if every test passes', function () {
                 assert.ok(xrange(5).every(function (value) {
