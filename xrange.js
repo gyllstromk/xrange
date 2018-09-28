@@ -2,7 +2,7 @@
 (function () {
 
     var XRange = function (start, finish, by) {
-        this.length = Math.abs(Math.ceil((finish - start) / by));
+        var length = this.length = Math.abs(Math.ceil((finish - start) / by));
         var self = this;
 
         var cmp;
@@ -75,6 +75,17 @@
                 }
             };
             return iterator;
+        };
+
+        this.reversed = function () {
+            if (length === 0) {
+                return new XRange(0, 0, 1);
+            }
+            var last = start + ((length - 1) * by);
+            if (start < last) {
+                return new XRange(last, start - 1, -by);
+            }
+            return new XRange(last, start + 1, -by);
         };
 
         this.transformIterator = function (callback) {

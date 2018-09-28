@@ -246,6 +246,36 @@ describe('Test xrange', function () {
             assert.deepEqual(keys, [0, 1, 2, 3]);
         });
 
+        it('reversed', function () {
+            var reversed = xrange(2, 13, 3).reversed();
+            assert.deepEqual(reversed.toArray(), [11, 8, 5, 2]);
+            assert.strictEqual(reversed.length, 4);
+        });
+
+        it('reversed by 1', function () {
+            var reversed = xrange(2, 6).reversed();
+            assert.deepEqual(reversed.toArray(), [5, 4, 3, 2]);
+            assert.strictEqual(reversed.length, 4);
+        });
+
+        it('reversed backward', function () {
+            var reversed = xrange(13, 2, -3).reversed();
+            assert.deepEqual(reversed.toArray(), [4, 7, 10, 13]);
+            assert.strictEqual(reversed.length, 4);
+        });
+
+        it('reversed backward by 1', function () {
+            var reversed = xrange(6, 2, -1).reversed();
+            assert.deepEqual(reversed.toArray(), [3, 4, 5, 6]);
+            assert.strictEqual(reversed.length, 4);
+        });
+
+        it('reversed empty', function () {
+            var reversed = xrange(5, 5).reversed();
+            assert.deepEqual(reversed.toArray(), []);
+            assert.strictEqual(reversed.length, 0);
+        });
+
         it('filter', function () {
             var filtered = xrange(5, 10).filter(function (value) {
                 return value % 3 === 0;
