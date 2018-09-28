@@ -245,166 +245,242 @@ describe('Test xrange', function () {
             }
             assert.deepEqual(keys, [0, 1, 2, 3]);
         });
+    });
 
-        it('reversed', function () {
-            var reversed = xrange(2, 13, 3).reversed();
-            assert.deepEqual(reversed.toArray(), [11, 8, 5, 2]);
-            assert.strictEqual(reversed.length, 4);
+    it('reversed', function () {
+        var reversed = xrange(2, 13, 3).reversed();
+        assert.deepEqual(reversed.toArray(), [11, 8, 5, 2]);
+        assert.strictEqual(reversed.length, 4);
+    });
+
+    it('reversed by 1', function () {
+        var reversed = xrange(2, 6).reversed();
+        assert.deepEqual(reversed.toArray(), [5, 4, 3, 2]);
+        assert.strictEqual(reversed.length, 4);
+    });
+
+    it('reversed backward', function () {
+        var reversed = xrange(13, 2, -3).reversed();
+        assert.deepEqual(reversed.toArray(), [4, 7, 10, 13]);
+        assert.strictEqual(reversed.length, 4);
+    });
+
+    it('reversed backward by 1', function () {
+        var reversed = xrange(6, 2, -1).reversed();
+        assert.deepEqual(reversed.toArray(), [3, 4, 5, 6]);
+        assert.strictEqual(reversed.length, 4);
+    });
+
+    it('reversed empty', function () {
+        var reversed = xrange(5, 5).reversed();
+        assert.deepEqual(reversed.toArray(), []);
+        assert.strictEqual(reversed.length, 0);
+    });
+
+    it('filter', function () {
+        var filtered = xrange(5, 10).filter(function (value) {
+            return value % 3 === 0;
+        });
+        assert.deepEqual(filtered, [6, 9]);
+    });
+
+    it('find', function () {
+        var found = xrange(5, 10).find(function (value) {
+            return value % 3 === 0;
+        });
+        assert.strictEqual(found, 6);
+    });
+
+    it('find nothing', function () {
+        var found = xrange(5, 10).find(function (value) {
+            return value < 5;
+        });
+        assert.strictEqual(found, undefined);
+    });
+
+    it('findIndex', function () {
+        var found = xrange(5, 10).findIndex(function (value) {
+            return value % 3 === 0;
+        });
+        assert.strictEqual(found, 1);
+    });
+
+    it('find no index', function () {
+        var found = xrange(5, 10).findIndex(function (value) {
+            return value < 5;
+        });
+        assert.strictEqual(found, -1);
+    });
+
+    it('findEntry', function () {
+        var found = xrange(5, 10).findEntry(function (value) {
+            return value % 3 === 0;
+        });
+        assert.deepEqual(found, [1, 6]);
+    });
+
+    it('find no entry', function () {
+        var found = xrange(5, 10).findEntry(function (value) {
+            return value < 5;
+        });
+        assert.deepEqual(found, [-1, undefined]);
+    });
+
+    it('includes', function () {
+        assert.ok(xrange(4).includes(2));
+    });
+
+    it('does not include', function () {
+        assert.ok(!xrange(4).includes(4));
+    });
+
+    describe('indexOf', function () {
+        it('is found', function () {
+            assert.strictEqual(xrange(5, 10).indexOf(7), 2);
         });
 
-        it('reversed by 1', function () {
-            var reversed = xrange(2, 6).reversed();
-            assert.deepEqual(reversed.toArray(), [5, 4, 3, 2]);
-            assert.strictEqual(reversed.length, 4);
+        it('is not found', function () {
+            assert.strictEqual(xrange(5, 10).indexOf(10), -1);
+        });
+    });
+
+    describe('join', function () {
+        it('with a sep', function () {
+            assert.strictEqual(xrange(5, 11).join(', '), '5, 6, 7, 8, 9, 10');
         });
 
-        it('reversed backward', function () {
-            var reversed = xrange(13, 2, -3).reversed();
-            assert.deepEqual(reversed.toArray(), [4, 7, 10, 13]);
-            assert.strictEqual(reversed.length, 4);
+        it('without a sep', function () {
+            assert.strictEqual(xrange(5, 11).join(), '5678910');
         });
+    });
 
-        it('reversed backward by 1', function () {
-            var reversed = xrange(6, 2, -1).reversed();
-            assert.deepEqual(reversed.toArray(), [3, 4, 5, 6]);
-            assert.strictEqual(reversed.length, 4);
-        });
-
-        it('reversed empty', function () {
-            var reversed = xrange(5, 5).reversed();
-            assert.deepEqual(reversed.toArray(), []);
-            assert.strictEqual(reversed.length, 0);
-        });
-
-        it('filter', function () {
-            var filtered = xrange(5, 10).filter(function (value) {
-                return value % 3 === 0;
-            });
-            assert.deepEqual(filtered, [6, 9]);
-        });
-
-        it('find', function () {
-            var found = xrange(5, 10).find(function (value) {
-                return value % 3 === 0;
-            });
-            assert.strictEqual(found, 6);
-        });
-
-        it('find nothing', function () {
-            var found = xrange(5, 10).find(function (value) {
+    describe('every', function () {
+        it('returns true if every test passes', function () {
+            assert.ok(xrange(5).every(function (value) {
                 return value < 5;
-            });
-            assert.strictEqual(found, undefined);
+            }));
         });
 
-        it('findIndex', function () {
-            var found = xrange(5, 10).findIndex(function (value) {
-                return value % 3 === 0;
-            });
-            assert.strictEqual(found, 1);
+        it('returns false if any test fails', function () {
+            assert.ok(!xrange(5).every(function (value) {
+                return value !== 3;
+            }));
         });
 
-        it('find no index', function () {
-            var found = xrange(5, 10).findIndex(function (value) {
-                return value < 5;
-            });
-            assert.strictEqual(found, -1);
+        it('returns true for an empty range', function () {
+            assert.ok(xrange(0).every(function () {
+                return false;
+            }));
+        });
+    });
+
+    describe('some', function () {
+        it('returns false if every test fails', function () {
+            assert.ok(!xrange(5).some(function (value) {
+                return value >= 5;
+            }));
         });
 
-        it('findEntry', function () {
-            var found = xrange(5, 10).findEntry(function (value) {
-                return value % 3 === 0;
-            });
-            assert.deepEqual(found, [1, 6]);
+        it('returns true if any test passes', function () {
+            assert.ok(xrange(5).some(function (value) {
+                return value === 3;
+            }));
         });
 
-        it('find no entry', function () {
-            var found = xrange(5, 10).findEntry(function (value) {
-                return value < 5;
-            });
-            assert.deepEqual(found, [-1, undefined]);
+        it('returns false for an empty range', function () {
+            assert.ok(!xrange(0).some(function () {
+                return true;
+            }));
+        });
+    });
+
+    it('reduce', function () {
+        var sum = xrange(5, 10).reduce(function (acc, value) {
+            return acc + value;
+        }, 0);
+        assert.strictEqual(sum, 35);
+    });
+
+    it('reduce without init', function () {
+        var sum = xrange(5, 10).reduce(function (acc, value) {
+            return acc * value;
+        });
+        assert.strictEqual(sum, 15120);
+    });
+
+    describe('shifted', function () {
+        it('no-arg', function () {
+            var shifted = xrange(5, 10).shifted();
+            assert.deepEqual(shifted.toArray(), [6, 7, 8, 9]);
+            assert.strictEqual(shifted.length, 4);
         });
 
-        it('includes', function () {
-            assert.ok(xrange(4).includes(2));
+        it('by amount', function () {
+            var shifted = xrange(5, 10).shifted(3);
+            assert.deepEqual(shifted.toArray(), [8, 9]);
+            assert.strictEqual(shifted.length, 2);
         });
 
-        it('does not include', function () {
-            assert.ok(!xrange(4).includes(4));
+        it('by length', function () {
+            var shifted = xrange(5, 10).shifted(5);
+            assert.deepEqual(shifted.toArray(), []);
+            assert.strictEqual(shifted.length, 0);
         });
 
-        describe('indexOf', function () {
-            it('is found', function () {
-                assert.strictEqual(xrange(5, 10).indexOf(7), 2);
-            });
-
-            it('is not found', function () {
-                assert.strictEqual(xrange(5, 10).indexOf(10), -1);
-            });
+        it('by more than length', function () {
+            var shifted = xrange(5, 10).shifted(10);
+            assert.deepEqual(shifted.toArray(), []);
+            assert.strictEqual(shifted.length, 0);
         });
 
-        describe('join', function () {
-            it('with a sep', function () {
-                assert.strictEqual(xrange(5, 11).join(', '), '5, 6, 7, 8, 9, 10');
-            });
-
-            it('without a sep', function () {
-                assert.strictEqual(xrange(5, 11).join(), '5678910');
-            });
+        it('by negative amount', function () {
+            var shifted = xrange(5, 10).shifted(-2);
+            assert.deepEqual(shifted.toArray(), [3, 4, 5, 6, 7, 8, 9]);
+            assert.strictEqual(shifted.length, 7);
         });
 
-        describe('every', function () {
-            it('returns true if every test passes', function () {
-                assert.ok(xrange(5).every(function (value) {
-                    return value < 5;
-                }));
-            });
+        it('on backward range', function () {
+            var shifted = xrange(3, -6, -2).shifted(2);
+            assert.deepEqual(shifted.toArray(), [-1, -3, -5]);
+            assert.strictEqual(shifted.length, 3);
+        });
+    });
 
-            it('returns false if any test fails', function () {
-                assert.ok(!xrange(5).every(function (value) {
-                    return value !== 3;
-                }));
-            });
-
-            it('returns true for an empty range', function () {
-                assert.ok(xrange(0).every(function () {
-                    return false;
-                }));
-            });
+    describe('extended', function () {
+        it('no-arg', function () {
+            var extended = xrange(5, 10).extended();
+            assert.deepEqual(extended.toArray(), [5, 6, 7, 8, 9, 10]);
+            assert.strictEqual(extended.length, 6);
         });
 
-        describe('some', function () {
-            it('returns false if every test fails', function () {
-                assert.ok(!xrange(5).some(function (value) {
-                    return value >= 5;
-                }));
-            });
-
-            it('returns true if any test passes', function () {
-                assert.ok(xrange(5).some(function (value) {
-                    return value === 3;
-                }));
-            });
-
-            it('returns false for an empty range', function () {
-                assert.ok(!xrange(0).some(function () {
-                    return true;
-                }));
-            });
+        it('by amount', function () {
+            var extended = xrange(5, 10).extended(3);
+            assert.deepEqual(extended.toArray(), [5, 6, 7, 8, 9, 10, 11, 12]);
+            assert.strictEqual(extended.length, 8);
         });
 
-        it('reduce', function () {
-            var sum = xrange(5, 10).reduce(function (acc, value) {
-                return acc + value;
-            }, 0);
-            assert.strictEqual(sum, 35);
+        it('by negative length', function () {
+            var extended = xrange(5, 10).extended(-5);
+            assert.deepEqual(extended.toArray(), []);
+            assert.strictEqual(extended.length, 0);
         });
 
-        it('reduce without init', function () {
-            var sum = xrange(5, 10).reduce(function (acc, value) {
-                return acc * value;
-            });
-            assert.strictEqual(sum, 15120);
+        it('by less than negative length', function () {
+            var extended = xrange(5, 10).extended(-10);
+            assert.deepEqual(extended.toArray(), []);
+            assert.strictEqual(extended.length, 0);
+        });
+
+        it('by negative amount', function () {
+            var extended = xrange(5, 10).extended(-2);
+            assert.deepEqual(extended.toArray(), [5, 6, 7]);
+            assert.strictEqual(extended.length, 3);
+        });
+
+        it('on backward range', function () {
+            var extended = xrange(3, -6, -2).extended(2);
+            assert.deepEqual(extended.toArray(), [3, 1, -1, -3, -5, -7, -9]);
+            assert.strictEqual(extended.length, 7);
         });
     });
 });

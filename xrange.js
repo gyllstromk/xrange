@@ -211,6 +211,28 @@
             return acc;
         };
 
+        this.first = function () {
+            return start;
+        };
+
+        this.shifted = function (_amt) {
+            var args = Array.prototype.slice.call(arguments);
+            var amount = args.length > 0 ? _amt : 1;
+            if (amount >= length) {
+                return new XRange(0, 0, 1);
+            }
+            return new XRange(start + (amount * by), finish, by);
+        };
+
+        this.extended = function (_amt) {
+            var args = Array.prototype.slice.call(arguments);
+            var amount = args.length > 0 ? _amt : 1;
+            if (amount <= -length) {
+                return new XRange(0, 0, 1);
+            }
+            return new XRange(start, finish + (amount * by), by);
+        };
+
         if (typeof Symbol !== 'undefined' && typeof Symbol.iterator !== 'undefined') {
             this[Symbol.iterator] = this.iterator;
         }
