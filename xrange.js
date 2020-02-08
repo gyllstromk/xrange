@@ -8,21 +8,47 @@
              * Create array by executing `map` on each value.
              */
 
-            var results = [];
+            var results = new Array(this.length);
 
-            var cmp = function (i, finish) {
-                if (start < finish) {
-                    return i < finish;
-                } else {
-                    return i > finish;
-                }
-            };
+            var value = start;
 
-            for (var i = start; cmp(i, finish); i += by) {
-                results.push(callback(i));
+            for (var i = 0; i < this.length; i++) {
+                results[i] = callback(value);
+                value += by;
             }
 
             return results;
+        };
+
+        this.filter = function (callback) {
+            /**
+             * Create array of items that satisfy predicate function
+             */
+
+            var results = [];
+
+            for (var i = start; i < finish; i += by) {
+                if (callback(i)) {
+                    results.push(i);
+                }
+            }
+            return results;
+        };
+
+        this.reduce = function (callback, acc) {
+            /**
+             *  Reduces an xrange by specified callback
+             */
+
+            if (acc === undefined) {
+                acc = start;
+                start += by;
+            }
+
+            for (var i = start; i < finish; i += by) {
+                acc = callback(acc, i);
+            }
+            return acc;
         };
 
         this.each = this.forEach = function (callback) {
@@ -48,6 +74,8 @@
                 return each;
             });
         };
+
+
     };
 
     var factory = function (start, finish, by) {
