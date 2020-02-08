@@ -1,7 +1,7 @@
 (function () {
 
     var XRange = function (start, finish, by) {
-        this.length = Math.ceil((finish - start) / by);
+        this.length = Math.abs(Math.ceil((finish - start) / by));
 
         this.map = function (callback) {
             /**
